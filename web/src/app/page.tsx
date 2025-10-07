@@ -125,18 +125,18 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 p-4 md:p-8">
+    <main className="min-h-screen bg-gray-50 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
-                <Activity className="w-8 h-8 text-purple-400" />
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                <Activity className="w-8 h-8 text-gray-700" />
                 System Monitor
               </h1>
               {metrics && (
-                <p className="text-gray-400 text-sm flex items-center gap-2">
+                <p className="text-gray-600 text-sm flex items-center gap-2">
                   <Server className="w-4 h-4" />
                   {metrics.system.hostname} • {metrics.system.os} •{" "}
                   {metrics.system.platform}
@@ -155,7 +155,7 @@ export default function Home() {
               {connected ? "Connected" : error || "Disconnected"}
             </Badge>
           </div>
-          <Separator className="bg-slate-700" />
+          <Separator className="bg-gray-200" />
         </div>
 
         {metrics ? (
@@ -166,7 +166,7 @@ export default function Home() {
                 title="CPU Usage"
                 value={`${metrics.cpu.usagePercent.toFixed(1)}%`}
                 subValue={`${metrics.cpu.cores} cores available`}
-                color="bg-blue-500"
+                color="bg-gray-700"
                 percentage={metrics.cpu.usagePercent}
                 icon={<Cpu className="w-5 h-5" />}
               />
@@ -176,7 +176,7 @@ export default function Home() {
                 subValue={`${formatBytes(metrics.memory.used)} / ${formatBytes(
                   metrics.memory.total
                 )}`}
-                color="bg-purple-500"
+                color="bg-gray-600"
                 percentage={metrics.memory.usedPercent}
                 icon={<MemoryStick className="w-5 h-5" />}
               />
@@ -186,7 +186,7 @@ export default function Home() {
                 subValue={`${formatBytes(metrics.disk.used)} / ${formatBytes(
                   metrics.disk.total
                 )}`}
-                color="bg-pink-500"
+                color="bg-gray-500"
                 percentage={metrics.disk.usedPercent}
                 icon={<HardDrive className="w-5 h-5" />}
               />
@@ -194,7 +194,7 @@ export default function Home() {
                 title="System Uptime"
                 value={metrics.uptimeHuman}
                 subValue={`${metrics.uptime.toLocaleString()} seconds`}
-                color="bg-green-500"
+                color="bg-gray-400"
                 percentage={null}
                 icon={<Clock className="w-5 h-5" />}
               />
@@ -211,63 +211,63 @@ export default function Home() {
             </div>
 
             {/* System Info */}
-            <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-slate-700">
+            <Card className="bg-white border-gray-200">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
+                <CardTitle className="text-gray-900 flex items-center gap-2">
                   <Server className="w-5 h-5" />
                   System Information
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-gray-600">
                   Detailed information about your system
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                   <div className="space-y-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">
+                    <p className="text-gray-500 text-xs uppercase tracking-wide">
                       Hostname
                     </p>
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900">
                       {metrics.system.hostname}
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">
+                    <p className="text-gray-500 text-xs uppercase tracking-wide">
                       Operating System
                     </p>
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900">
                       {metrics.system.os}
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">
+                    <p className="text-gray-500 text-xs uppercase tracking-wide">
                       Platform
                     </p>
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900">
                       {metrics.system.platform}
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">
+                    <p className="text-gray-500 text-xs uppercase tracking-wide">
                       Platform Version
                     </p>
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900">
                       {metrics.system.platformVersion}
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">
+                    <p className="text-gray-500 text-xs uppercase tracking-wide">
                       Go Version
                     </p>
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900">
                       {metrics.system.goVersion}
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">
+                    <p className="text-gray-500 text-xs uppercase tracking-wide">
                       Last Update
                     </p>
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900">
                       {new Date(metrics.timestamp).toLocaleTimeString()}
                     </p>
                   </div>
@@ -276,9 +276,9 @@ export default function Home() {
             </Card>
           </>
         ) : (
-          <div className="text-center text-white py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mb-4"></div>
-            <p className="text-gray-300">Loading metrics...</p>
+          <div className="text-center text-gray-900 py-20">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gray-700 mb-4"></div>
+            <p className="text-gray-600">Loading metrics...</p>
           </div>
         )}
       </div>

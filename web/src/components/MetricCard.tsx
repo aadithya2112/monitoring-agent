@@ -26,25 +26,25 @@ export default function MetricCard({
   }
 
   return (
-    <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-slate-700 hover:border-slate-600 transition-all hover:shadow-lg backdrop-blur-sm">
+    <Card className="bg-white border-gray-200 hover:border-gray-300 transition-all hover:shadow-md">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-300">
+        <CardTitle className="text-sm font-medium text-gray-600">
           {title}
         </CardTitle>
-        {icon && <div className="text-gray-400">{icon}</div>}
+        {icon && <div className="text-gray-500">{icon}</div>}
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline justify-between mb-2">
-          <div className="text-3xl font-bold text-white">{value}</div>
+          <div className="text-3xl font-bold text-gray-900">{value}</div>
           {percentage !== null && (
             <Badge variant={getStatusColor(percentage)} className="ml-2">
               {percentage.toFixed(1)}%
             </Badge>
           )}
         </div>
-        <p className="text-xs text-gray-400 mb-3">{subValue}</p>
+        <p className="text-xs text-gray-500 mb-3">{subValue}</p>
         {percentage !== null && (
-          <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
             <div
               className={`h-full ${color} transition-all duration-500 ease-out`}
               style={{ width: `${Math.min(percentage, 100)}%` }}

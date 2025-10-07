@@ -47,21 +47,49 @@ export default function DiskChart({ data }: DiskChartProps) {
     },
   ]
 
-  const COLORS = ["#ec4899", "#10b981"]
+  const COLORS = ["#374151", "#9ca3af"]
 
   const renderCustomLabel = (entry: any) => {
     const percent = ((entry.value / data.disk.total) * 100).toFixed(1)
     return `${entry.name}: ${percent}%`
   }
 
+  const RADIAN = Math.PI / 180
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+    const x = cx + radius * Math.cos(-midAngle * RADIAN)
+    const y = cy + radius * Math.sin(-midAngle * RADIAN)
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="#ffffff"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+        className="text-sm font-semibold"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    )
+  }
+
   return (
-    <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-slate-700">
+    <Card className="bg-white border-gray-200">
       <CardHeader>
-        <CardTitle className="text-white flex items-center gap-2">
-          <HardDrive className="w-5 h-5 text-pink-400" />
+        <CardTitle className="text-gray-900 flex items-center gap-2">
+          <HardDrive className="w-5 h-5 text-gray-700" />
           Disk Usage Distribution
         </CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardDescription className="text-gray-600">
           Storage allocation breakdown
         </CardDescription>
       </CardHeader>
@@ -73,8 +101,8 @@ export default function DiskChart({ data }: DiskChartProps) {
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={renderCustomLabel}
-              outerRadius={80}
+              label={renderCustomizedLabel}
+              outerRadius={100}
               fill="#8884d8"
               dataKey="value"
             >
@@ -88,17 +116,17 @@ export default function DiskChart({ data }: DiskChartProps) {
             <Tooltip
               formatter={(value: number) => formatBytes(value)}
               contentStyle={{
-                backgroundColor: "rgba(17, 24, 39, 0.9)",
-                border: "1px solid #374151",
+                backgroundColor: "rgba(255, 255, 255, 0.98)",
+                border: "1px solid #e5e7eb",
                 borderRadius: "0.5rem",
               }}
-              labelStyle={{ color: "#9ca3af" }}
+              labelStyle={{ color: "#374151" }}
             />
             <Legend
               formatter={(value, entry: any) =>
                 `${value}: ${entry.payload.formatted}`
               }
-              wrapperStyle={{ color: "#9ca3af" }}
+              wrapperStyle={{ color: "#374151" }}
             />
           </PieChart>
         </ResponsiveContainer>

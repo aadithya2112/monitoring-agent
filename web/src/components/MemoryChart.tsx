@@ -32,54 +32,54 @@ export default function MemoryChart({ data }: MemoryChartProps) {
   }))
 
   return (
-    <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-slate-700">
+    <Card className="bg-white border-gray-200">
       <CardHeader>
-        <CardTitle className="text-white flex items-center gap-2">
-          <MemoryStick className="w-5 h-5 text-purple-400" />
+        <CardTitle className="text-gray-900 flex items-center gap-2">
+          <MemoryStick className="w-5 h-5 text-gray-700" />
           Memory Usage History
         </CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardDescription className="text-gray-600">
           RAM consumption over time
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis
               dataKey="time"
-              stroke="#9ca3af"
-              tick={{ fill: "#9ca3af" }}
+              stroke="#6b7280"
+              tick={{ fill: "#6b7280" }}
               label={{
                 value: "Time",
                 position: "insideBottom",
                 offset: -5,
-                fill: "#9ca3af",
+                fill: "#6b7280",
               }}
             />
             <YAxis
-              stroke="#9ca3af"
-              tick={{ fill: "#9ca3af" }}
+              stroke="#6b7280"
+              tick={{ fill: "#6b7280" }}
               domain={[0, 100]}
               label={{
                 value: "Usage (%)",
                 angle: -90,
                 position: "insideLeft",
-                fill: "#9ca3af",
+                fill: "#6b7280",
               }}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "rgba(17, 24, 39, 0.9)",
-                border: "1px solid #374151",
+                backgroundColor: "rgba(255, 255, 255, 0.98)",
+                border: "1px solid #e5e7eb",
                 borderRadius: "0.5rem",
               }}
-              labelStyle={{ color: "#9ca3af" }}
+              labelStyle={{ color: "#374151" }}
             />
             <Line
               type="monotone"
               dataKey="memory"
-              stroke="#a855f7"
+              stroke="#6b7280"
               strokeWidth={2}
               dot={false}
               animationDuration={300}
