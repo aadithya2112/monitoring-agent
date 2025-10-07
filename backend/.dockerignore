@@ -1,0 +1,6 @@
+*.md
+.git
+.gitignore
+*.exe
+*.test
+*.out
