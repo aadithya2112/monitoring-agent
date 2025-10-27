@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"os"
 	"runtime"
 	"time"
 
@@ -77,8 +78,14 @@ func Collect() (SystemMetrics, error) {
 	m.Memory.Available = vmStat.Available
 	m.Memory.UsedPercent = vmStat.UsedPercent
 
-	// Disk metrics (root partition)
-	diskStat, err := disk.Usage("/")
+	// Disk metrics - use host filesystem if running in container
+	diskPath := "/"
+	// Check if running in container with mounted host filesystem
+	if _, err := os.Stat("/hostfs"); err == nil {
+		diskPath = "/hostfs"
+	}
+
+	diskStat, err := disk.Usage(diskPath)
 	if err != nil {
 		return m, err
 	}
