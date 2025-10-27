@@ -9,9 +9,22 @@ services:
     environment:
       - PORT=8080
       - METRICS_INTERVAL=2
+      # Environment variables for gopsutil to read host metrics
+      - HOST_PROC=/host/proc
+      - HOST_SYS=/host/sys
+      - HOST_ETC=/host/etc
     restart: unless-stopped
     networks:
       - monitoring-network
+    # Mount host system paths to monitor the actual host machine (read-only)
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc:/host/etc:ro
+      - /:/hostfs:ro
+    # Required for accessing host system information
+    privileged: true
+    pid: "host"
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/metrics"]
       interval: 30s
